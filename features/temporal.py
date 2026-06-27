@@ -26,7 +26,13 @@ def temporal_stats(timestamps: list[float]) -> dict:
     """Compute statistical summary of posting behavior for an account."""
     intervals = compute_inter_event_intervals(timestamps)
     if len(intervals) == 0:
-        return {"mean": None, "std": None, "cv": None, "burst_freqs": []}
+        return {
+            "mean_interval_sec": None,
+            "std_interval_sec": None,
+            "coefficient_of_variation": None,
+            "burst_freqs_hz": [],
+            "event_count": len(timestamps),
+        }
     mean = float(np.mean(intervals))
     std = float(np.std(intervals))
     cv = std / mean if mean > 0 else 0.0  # coefficient of variation

@@ -24,15 +24,25 @@ CREATE INDEX idx_raw_events_platform   ON raw_events(platform);
 
 -- Account-level behavioral fingerprints
 CREATE TABLE IF NOT EXISTS account_fingerprints (
-    account_id          TEXT PRIMARY KEY,
-    platform            TEXT NOT NULL,
-    temporal_embedding  vector(128),        -- output of temporal encoder
-    entropy_embedding   vector(64),         -- output of entropy encoder
-    device_echo_hash    TEXT,               -- JA3 / header fingerprint hash
-    burst_periodicity   FLOAT,              -- dominant burst frequency (Hz)
-    inter_event_mean    FLOAT,              -- mean inter-post interval (seconds)
-    inter_event_std     FLOAT,
-    last_updated        TIMESTAMPTZ DEFAULT NOW()
+    account_id                  TEXT PRIMARY KEY,
+    platform                    TEXT NOT NULL,
+    temporal_embedding          vector(128),        -- output of temporal encoder
+    entropy_embedding           vector(64),         -- output of entropy encoder
+    device_echo_hash            TEXT,               -- JA3 / header fingerprint hash
+    burst_periodicity           FLOAT,              -- dominant burst frequency (Hz)
+    inter_event_mean            FLOAT,              -- mean inter-post interval (seconds)
+    inter_event_std             FLOAT,
+    mean_interval_sec           FLOAT,
+    std_interval_sec            FLOAT,
+    coefficient_of_variation    FLOAT,
+    burst_freqs_hz              FLOAT[],
+    event_count                 INT,
+    char_entropy_mean           FLOAT,
+    char_entropy_std            FLOAT,
+    word_entropy_mean           FLOAT,
+    word_entropy_std            FLOAT,
+    entropy_sample_count        INT,
+    last_updated                TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- Detected CIB campaigns

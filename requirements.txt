@@ -30,3 +30,4 @@ opentelemetry-sdk>=1.24
 pytest>=8.2
 black>=24
 ruff>=0.4
+pyarrow>=15.0
