@@ -6,12 +6,15 @@ NO user PII is collected — only public post metadata and timestamps.
 """
 
 import asyncio
+import argparse
+import json
 import logging
 import os
 from datetime import datetime, timezone
 from typing import AsyncGenerator
 
 import httpx
+from kafka import KafkaProducer
 
 logger = logging.getLogger(__name__)
 
@@ -60,7 +63,7 @@ async def fetch_recent_tweets(query: str, max_results: int = 100) -> AsyncGenera
         }
 
 
-async def run_collector(queries: list[str] = DEFAULT_QUERIES, kafka_producer=None):
+async def run_collector(queries: list[str] = DEFAULT_QUERIES, kafka_producer=None, once: bool = False):
     while True:
         for q in queries:
             try:
@@ -72,9 +75,36 @@ async def run_collector(queries: list[str] = DEFAULT_QUERIES, kafka_producer=Non
             except Exception as e:
                 logger.error(f"Twitter collector error: {e}")
             await asyncio.sleep(2)
+            
+            if once:
+                break
+                
+        if once:
+            logger.info("Run once specified. Exiting Twitter collector.")
+            break
         await asyncio.sleep(300)
 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    asyncio.run(run_collector())
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--once", action="store_true", help="Run once and exit")
+    args = parser.parse_args()
+    
+    bootstrap_servers = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092").split(",")
+    try:
+        producer = KafkaProducer(
+            bootstrap_servers=bootstrap_servers,
+            value_serializer=lambda v: json.dumps(v).encode("utf-8")
+        )
+        logger.info(f"Connected to Redpanda at {bootstrap_servers}")
+    except Exception as e:
+        logger.warning(f"Could not connect to Redpanda ({e}). Printing events instead.")
+        producer = None
+        
+    asyncio.run(run_collector(kafka_producer=producer, once=args.once))
+    
+    if producer:
+        producer.flush()
+        producer.close()

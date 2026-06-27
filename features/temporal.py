@@ -2,7 +2,6 @@
 
 import numpy as np
 from datetime import datetime
-from typing import list
 
 
 def compute_inter_event_intervals(timestamps: list[float]) -> np.ndarray:

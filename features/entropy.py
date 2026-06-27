@@ -2,7 +2,6 @@
 
 import math
 from collections import Counter
-from typing import list
 
 
 def char_ngram_entropy(text: str, n: int = 3) -> float:

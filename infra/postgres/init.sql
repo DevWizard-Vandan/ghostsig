@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS raw_events (
     word_entropy    FLOAT,                  -- word-level entropy
     device_hint     TEXT,                   -- public user-agent / platform header (if available)
     metadata        JSONB,                  -- raw public metadata (no PII)
-    ingested_at     TIMESTAMPTZ DEFAULT NOW()
+    ingested_at     TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT uq_raw_events_platform_account_ts UNIQUE (platform, account_id, event_ts)
 );
 
 CREATE INDEX idx_raw_events_account_id ON raw_events(account_id);
