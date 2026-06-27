@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.env
+*.env
+
+# Data
+*.parquet
+*.csv
+*.json.gz
+data/raw/
+data/processed/
+
+# Models
+models/
+checkpoints/
+*.pt
+*.pth
+
+# Logs
+logs/
+*.log
+
+# Docker
+pgdata/
+miniodata/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
