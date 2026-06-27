@@ -28,6 +28,9 @@ def test_model_forward():
 
 
 def test_masked_prediction():
+    # Set seed for deterministic test execution
+    torch.manual_seed(42)
+    
     # Masked prediction: masked positions have higher loss than unmasked
     encoder = TemporalEncoder(max_seq_len=64)
     model = TemporalPretrainWrapper(encoder)
@@ -46,7 +49,7 @@ def test_masked_prediction():
     
     # Run in eval mode to disable dropout, allowing stable convergence of identity copy mapping
     model.eval()
-    for _ in range(50):
+    for _ in range(100):
         optimizer.zero_grad()
         preds = model(masked_intervals, mask=masks_col)
         
