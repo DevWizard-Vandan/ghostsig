@@ -2,14 +2,11 @@
 
 import json
 import os
-import random
 import shutil
 from datetime import datetime, timezone, timedelta
 
-import pytest
 import torch
 import torch.nn as nn
-import numpy as np
 import psycopg
 
 from ml.temporal_encoder import TemporalEncoder

@@ -1,7 +1,6 @@
 """Temporal feature extraction — inter-event intervals, burst detection, periodicity."""
 
 import numpy as np
-from datetime import datetime
 
 
 def compute_inter_event_intervals(timestamps: list[float]) -> np.ndarray:

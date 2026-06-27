@@ -7,7 +7,6 @@ import sys
 import time
 from datetime import datetime, timezone, timedelta
 
-import pytest
 import torch
 import numpy as np
 import hdbscan
@@ -47,7 +46,7 @@ def test_hdbscan_synthetic_clusters():
     labels = clusterer.fit_predict(data)
     
     unique_labels = set(labels)
-    n_clusters = len([l for l in unique_labels if l != -1])
+    n_clusters = len([lbl for lbl in unique_labels if lbl != -1])
     
     # Verify that HDBSCAN successfully discovers the planted structures
     assert n_clusters >= 2

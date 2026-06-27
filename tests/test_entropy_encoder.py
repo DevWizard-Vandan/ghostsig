@@ -11,7 +11,7 @@ import numpy as np
 import psycopg
 
 from ml.entropy_encoder import EntropyEncoder
-from ml.train_entropy import MinMaxFeatureScaler, nt_xent_loss, DATABASE_URL
+from ml.train_entropy import MinMaxFeatureScaler, DATABASE_URL
 from consumers.raw_to_postgres import process_message
 from pipeline.normalize import run_pipeline, KAFKA_BOOTSTRAP_SERVERS
 from kafka import KafkaProducer

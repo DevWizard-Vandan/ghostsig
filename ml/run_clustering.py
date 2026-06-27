@@ -7,7 +7,6 @@ import uuid
 import numpy as np
 import pandas as pd
 import psycopg
-import torch
 import umap
 import hdbscan
 from sklearn.metrics import silhouette_score
@@ -124,7 +123,7 @@ def main():
 
     # 4. Compute metrics
     unique_labels = set(labels)
-    n_clusters = len([l for l in unique_labels if l != -1])
+    n_clusters = len([lbl for lbl in unique_labels if lbl != -1])
     n_noise = list(labels).count(-1)
     noise_fraction = float(n_noise) / len(labels)
     
@@ -245,7 +244,7 @@ def main():
     df_plot = pd.DataFrame({
         "UMAP Dimension 1": vis_embeddings[:, 0],
         "UMAP Dimension 2": vis_embeddings[:, 1],
-        "Cluster ID": [f"Cluster {l}" if l != -1 else "Noise" for l in labels],
+        "Cluster ID": [f"Cluster {lbl}" if lbl != -1 else "Noise" for lbl in labels],
         "Account ID": account_ids,
         "Platform": platforms
     })
