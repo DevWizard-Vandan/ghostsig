@@ -28,6 +28,8 @@ CREATE TABLE IF NOT EXISTS account_fingerprints (
     platform                    TEXT NOT NULL,
     temporal_embedding          vector(128),        -- output of temporal encoder
     entropy_embedding           vector(64),         -- output of entropy encoder
+    fused_embedding             vector(256),        -- output of fusion encoder
+    operator_id                 TEXT,               -- ID/hash of operator link
     device_echo_hash            TEXT,               -- JA3 / header fingerprint hash
     burst_periodicity           FLOAT,              -- dominant burst frequency (Hz)
     inter_event_mean            FLOAT,              -- mean inter-post interval (seconds)
@@ -52,6 +54,9 @@ CREATE TABLE IF NOT EXISTS campaigns (
     confidence          FLOAT,              -- 0.0 – 1.0
     account_count       INT,
     platform_count      INT,
+    platform_list       TEXT[],             -- array of platforms present in campaign
+    first_seen          TIMESTAMPTZ,        -- earliest activity
+    last_seen           TIMESTAMPTZ,        -- latest activity
     detected_at         TIMESTAMPTZ DEFAULT NOW(),
     evidence_json       JSONB               -- fingerprint overlap stats, shared markers
 );
