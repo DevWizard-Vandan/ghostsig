@@ -55,11 +55,11 @@ def fetch_synthetic_dataset(db_url: str):
             
         X.append(emb)
         
-        # Label: synth_bot = 1, synth_organic = 0
-        if "synth_bot:" in account_id:
-            y.append(1)
-        elif "synth_organic:" in account_id:
+        # Label: Bot = 1, Organic = 0
+        if "synth_organic:" in account_id:
             y.append(0)
+        else:
+            y.append(1)
             
     if not X:
         return np.empty((0, 256)), np.empty((0,))
@@ -67,12 +67,12 @@ def fetch_synthetic_dataset(db_url: str):
     return np.array(X, dtype=np.float32), np.array(y, dtype=np.int32)
 
 
-def main():
+def main(args_list=None):
     parser = argparse.ArgumentParser(description="Train XGBoost Adversarial Classifier")
     parser.add_argument("--epochs", type=int, default=200, help="Number of trees (n_estimators)")
     parser.add_argument("--batch-size", type=int, default=32, help="Placeholder for signature matching")
     parser.add_argument("--device", type=str, default="cpu", help="Device (cpu/cuda)")
-    args = parser.parse_args()
+    args = parser.parse_args(args_list)
 
     # 1. Fetch synthetic data
     X, y = fetch_synthetic_dataset(DATABASE_URL)

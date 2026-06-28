@@ -1,0 +1,59 @@
+{
+  "campaign_id": "197c9770-fb99-4aa3-bd5a-57f8199fefe6",
+  "operator_id": "operator_27dfed832d34",
+  "account_count": 12,
+  "platform_list": [
+    "synthetic"
+  ],
+  "confidence": 0.9931184649467468,
+  "confidence_tier": "HIGH",
+  "timing_overlap_pct": 0.0,
+  "entropy_overlap_pct": 1.0,
+  "device_echo_markers": 2,
+  "cross_platform_sync": 0,
+  "first_seen": "2026-06-18T13:24:31.202870+00:00",
+  "last_seen": "2026-06-22T01:39:01.392166+00:00",
+  "top_accounts": [
+    {
+      "account_id": "synth_bot:user_00002",
+      "platform": "synthetic",
+      "threat_prob": 0.5,
+      "char_entropy_mean": 2.5583389699432293,
+      "mean_interval_sec": 1397.8490528183409,
+      "event_count": 65
+    },
+    {
+      "account_id": "synth_bot:user_00007",
+      "platform": "synthetic",
+      "threat_prob": 0.5,
+      "char_entropy_mean": 2.8620908559317346,
+      "mean_interval_sec": 2492.0291951324543,
+      "event_count": 57
+    },
+    {
+      "account_id": "synth_bot:user_00020",
+      "platform": "synthetic",
+      "threat_prob": 0.5,
+      "char_entropy_mean": 3.4876546556137535,
+      "mean_interval_sec": 3392.0051862205787,
+      "event_count": 70
+    },
+    {
+      "account_id": "synth_bot:user_00025",
+      "platform": "synthetic",
+      "threat_prob": 0.5,
+      "char_entropy_mean": 2.63625635481025,
+      "mean_interval_sec": 2677.6520999299073,
+      "event_count": 59
+    },
+    {
+      "account_id": "synth_bot:user_00027",
+      "platform": "synthetic",
+      "threat_prob": 0.5,
+      "char_entropy_mean": 2.985710644914163,
+      "mean_interval_sec": 2195.1921412087027,
+      "event_count": 59
+    }
+  ],
+  "generated_at": "2026-06-28T12:46:02.111364+00:00"
+}

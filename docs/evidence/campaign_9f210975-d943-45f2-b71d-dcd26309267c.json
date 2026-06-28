@@ -1,0 +1,60 @@
+{
+  "campaign_id": "9f210975-d943-45f2-b71d-dcd26309267c",
+  "operator_id": "operator_f6cc631277d2",
+  "account_count": 6,
+  "platform_list": [
+    "twitter",
+    "synthetic"
+  ],
+  "confidence": 0.9931184649467468,
+  "confidence_tier": "HIGH",
+  "timing_overlap_pct": 0.6666666666666666,
+  "entropy_overlap_pct": 1.0,
+  "device_echo_markers": 0,
+  "cross_platform_sync": 0,
+  "first_seen": "2026-06-18T13:51:44.202870+00:00",
+  "last_seen": "2026-06-26T13:13:19.128003+00:00",
+  "top_accounts": [
+    {
+      "account_id": "synth_bot:user_00019",
+      "platform": "synthetic",
+      "threat_prob": 0.5,
+      "char_entropy_mean": 2.643746909711432,
+      "mean_interval_sec": 38.27715598974223,
+      "event_count": 59
+    },
+    {
+      "account_id": "twitter:embed_test_user_0",
+      "platform": "twitter",
+      "threat_prob": 0.5,
+      "char_entropy_mean": 3.736078119446597,
+      "mean_interval_sec": 120.0,
+      "event_count": 15
+    },
+    {
+      "account_id": "twitter:embed_test_user_2",
+      "platform": "twitter",
+      "threat_prob": 0.5,
+      "char_entropy_mean": 3.736078119446597,
+      "mean_interval_sec": 120.0,
+      "event_count": 15
+    },
+    {
+      "account_id": "twitter:embed_test_user_6",
+      "platform": "twitter",
+      "threat_prob": 0.5,
+      "char_entropy_mean": 3.736078119446597,
+      "mean_interval_sec": 120.0,
+      "event_count": 15
+    },
+    {
+      "account_id": "twitter:embed_test_user_8",
+      "platform": "twitter",
+      "threat_prob": 0.5,
+      "char_entropy_mean": 3.736078119446597,
+      "mean_interval_sec": 120.0,
+      "event_count": 15
+    }
+  ],
+  "generated_at": "2026-06-28T12:46:01.540298+00:00"
+}

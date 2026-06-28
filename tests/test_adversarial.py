@@ -40,8 +40,19 @@ def test_adversarial_classifier_roc_auc():
     # Load dataset from database
     X, y = fetch_synthetic_dataset(DATABASE_URL)
     
-    # Make sure we have enough data (at least 100)
-    assert len(X) >= 100, "Must run synthetic.bot_generator first to populate DB with enough data."
+    # If database doesn't have enough data (e.g. truncated during parallel test suite runs)
+    if len(X) < 100:
+        from synthetic.bot_generator import generate_dataset
+        from ml.embed_temporal import main as run_embed_temporal
+        from ml.embed_entropy import main as run_embed_entropy
+        from ml.embed_fusion import main as run_embed_fusion
+        generate_dataset(n_bots=50, n_organic=50)
+        run_embed_temporal()
+        run_embed_entropy()
+        run_embed_fusion()
+        X, y = fetch_synthetic_dataset(DATABASE_URL)
+        
+    assert len(X) >= 100
     
     from sklearn.model_selection import train_test_split
     from sklearn.metrics import roc_auc_score
