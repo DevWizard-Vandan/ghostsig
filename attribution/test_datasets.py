@@ -2,7 +2,6 @@
 
 import logging
 import os
-import sys
 import random
 from datetime import datetime, timedelta, timezone
 import numpy as np

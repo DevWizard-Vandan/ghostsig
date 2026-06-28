@@ -1,9 +1,5 @@
 """Unit and integration tests for the synthetic dataset simulators, adversarial classifier, and campaign scoring."""
 
-import os
-import sys
-import numpy as np
-import pytest
 import xgboost as xgb
 import psycopg
 

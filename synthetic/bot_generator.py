@@ -4,7 +4,6 @@ import argparse
 import logging
 import os
 import random
-import sys
 from datetime import datetime, timedelta, timezone
 import numpy as np
 import psycopg
@@ -164,7 +163,7 @@ class OrganicSimulator:
         for ts in timestamps:
             # Create a more complex organic sentence
             sentence_words = random.sample(ORGANIC_WORDS, k=random.randint(3, 7))
-            text = " ".join(sentence_words) + f". What are your opinions on this query?"
+            text = " ".join(sentence_words) + ". What are your opinions on this query?"
             raw_events.append({
                 "account_id": self.account_id,
                 "platform": self.platform,
