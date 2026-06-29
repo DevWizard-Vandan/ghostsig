@@ -5,9 +5,7 @@ authentication logic, pagination, and error handling.
 """
 
 import os
-import json
 import uuid
-import pytest
 from unittest.mock import patch, MagicMock
 from datetime import datetime, timezone
 
@@ -243,8 +241,6 @@ class TestEvidence:
             "sys.modules",
             {"attribution": MagicMock(), "attribution.evidence_cards": MagicMock()},
         ):
-            from importlib import reload
-            import api.main as api_mod
 
             with patch(
                 "attribution.evidence_cards.generate_json", return_value=mock_payload

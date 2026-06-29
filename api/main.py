@@ -5,7 +5,6 @@ import tempfile
 import logging
 from datetime import datetime
 from typing import Optional
-from uuid import UUID
 
 import psycopg
 from fastapi import FastAPI, Depends, HTTPException, Query, Security
