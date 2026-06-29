@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS campaigns (
     first_seen          TIMESTAMPTZ,        -- earliest activity
     last_seen           TIMESTAMPTZ,        -- latest activity
     detected_at         TIMESTAMPTZ DEFAULT NOW(),
+    operator_id         TEXT,               -- operator attribution link
     evidence_json       JSONB               -- fingerprint overlap stats, shared markers
 );
 

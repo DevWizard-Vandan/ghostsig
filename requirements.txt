@@ -3,6 +3,7 @@ httpx>=0.27
 fastapi>=0.111
 uvicorn[standard]>=0.30
 pydantic>=2.7
+python-multipart>=0.0.9
 
 # Data & ML
 numpy>=1.26
@@ -14,6 +15,8 @@ hdbscan>=0.8.33
 umap-learn>=0.5
 faiss-cpu>=1.8
 scikit-learn>=1.5
+xgboost>=2.0
+plotly>=5.22
 
 # Streaming
 kafka-python>=2.0
@@ -25,6 +28,11 @@ asyncpg>=0.29
 
 # Observability
 opentelemetry-sdk>=1.24
+
+# Reporting & Dashboard
+reportlab>=4.2
+streamlit>=1.35
+pyvis>=0.3
 
 # Dev
 pytest>=8.2
