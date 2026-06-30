@@ -5,6 +5,7 @@ import tempfile
 import logging
 from datetime import datetime
 from typing import Optional
+from uuid import UUID
 
 import psycopg
 from fastapi import FastAPI, Depends, HTTPException, Query, Security
@@ -242,7 +243,7 @@ async def list_campaigns(
 
 @app.get("/campaigns/{campaign_id}", response_model=CampaignDetail)
 async def get_campaign(
-    campaign_id: str,
+    campaign_id: UUID,
     _key: str = Depends(verify_api_key),
     conn=Depends(get_db),
 ):
@@ -253,7 +254,7 @@ async def get_campaign(
                    platform_list, first_seen, last_seen, operator_id, evidence_json, detected_at
             FROM campaigns WHERE campaign_id = %s;
             """,
-            (campaign_id,),
+            (str(campaign_id),),
         )
         row = cur.fetchone()
 
@@ -265,7 +266,7 @@ async def get_campaign(
     with conn.cursor() as cur:
         cur.execute(
             "SELECT account_id, similarity FROM campaign_accounts WHERE campaign_id = %s;",
-            (campaign_id,),
+            (str(campaign_id),),
         )
         members = [MemberAccount(account_id=r[0], similarity=r[1]) for r in cur.fetchall()]
 
@@ -288,13 +289,13 @@ async def get_campaign(
 
 @app.get("/campaigns/{campaign_id}/evidence")
 async def get_evidence(
-    campaign_id: str,
+    campaign_id: UUID,
     _key: str = Depends(verify_api_key),
 ):
     from attribution.evidence_cards import generate_json
 
     try:
-        payload = generate_json(campaign_id)
+        payload = generate_json(str(campaign_id))
     except ValueError as exc:
         raise HTTPException(status_code=404, detail=str(exc))
     return payload
@@ -302,7 +303,7 @@ async def get_evidence(
 
 @app.get("/campaigns/{campaign_id}/pdf")
 async def get_pdf(
-    campaign_id: str,
+    campaign_id: UUID,
     _key: str = Depends(verify_api_key),
 ):
     from attribution.evidence_cards import generate_pdf
@@ -312,7 +313,7 @@ async def get_pdf(
     tmp.close()
 
     try:
-        generate_pdf(campaign_id, tmp_path)
+        generate_pdf(str(campaign_id), tmp_path)
     except ValueError as exc:
         os.unlink(tmp_path)
         raise HTTPException(status_code=404, detail=str(exc))

@@ -46,7 +46,7 @@ def render_sidebar() -> tuple[str, str, float, list[str], str]:
         tier = st.selectbox("Tier", options=TIERS, index=0)
 
         st.divider()
-        if st.button("🔄 Refresh", use_container_width=True):
+        if st.button("🔄 Refresh", width='stretch'):
             st.cache_data.clear()
         st.caption(f"Last updated: {datetime.now(timezone.utc).strftime('%H:%M:%S UTC')}")
 
@@ -218,7 +218,7 @@ def page_campaign_overview(
     st.dataframe(
         df[available].sort_values("confidence", ascending=False)
         if "confidence" in df.columns else df[available],
-        use_container_width=True,
+        width='stretch',
         hide_index=True,
     )
 
@@ -269,7 +269,7 @@ def _render_campaign_detail(base_url: str, api_key: str, campaign_id: str) -> No
             accounts = evidence.get("top_accounts") or evidence.get("member_accounts", [])
             if accounts:
                 st.subheader("Top Accounts")
-                st.dataframe(pd.DataFrame(accounts), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(accounts), width='stretch', hide_index=True)
         except Exception as exc:
             st.warning(f"Could not load evidence: {exc}")
 
@@ -283,7 +283,7 @@ def _render_campaign_detail(base_url: str, api_key: str, campaign_id: str) -> No
                 data=pdf_bytes,
                 file_name=f"ghostsig_campaign_{campaign_id}.pdf",
                 mime="application/pdf",
-                use_container_width=True,
+                width='stretch',
             )
         except Exception as exc:
             st.warning(f"PDF not available: {exc}")
@@ -453,7 +453,7 @@ def page_live_ingest(base_url: str, api_key: str) -> None:
         "Ensure collectors and infrastructure are running."
     )
 
-    if st.button("▶️ Run Full Pipeline", type="primary", use_container_width=True):
+    if st.button("▶️ Run Full Pipeline", type="primary", width='stretch'):
         st.divider()
         with st.spinner("Running pipeline… this may take a few minutes."):
             try:

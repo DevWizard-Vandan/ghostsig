@@ -224,6 +224,16 @@ class TestCampaigns:
             resp = client.get(f"/campaigns/{fake_id}", headers=HEADERS)
             assert resp.status_code == 404
 
+    def test_campaign_invalid_uuid(self):
+        # Malformed UUID should return 422 Unprocessable Entity
+        for path in [
+            "/campaigns/invalid-uuid",
+            "/campaigns/invalid-uuid/evidence",
+            "/campaigns/invalid-uuid/pdf"
+        ]:
+            resp = client.get(path, headers=HEADERS)
+            assert resp.status_code == 422
+
 
 # ---------------------------------------------------------------------------
 # Evidence (uses attribution module, mock it)
