@@ -1,4 +1,4 @@
-﻿# 👻 GhostSig
+# 👻 GhostSig
 
 > GhostSig detects coordinated inauthentic behavior (CIB) networks using behavioral metadata fingerprinting — timing cadence, cross-platform rhythm, and linguistic entropy — without content access or PII.
 
@@ -25,7 +25,7 @@
 |--------|-------|
 | Automated tests | **44 / 44 passing** |
 | IRA-like campaign detected | **57 accounts · confidence 0.9931** |
-| Adversarial model AUC | **≥ 0.97** on held-out synthetic/organic set |
+| Adversarial model AUC | **> 0.75** asserted in test suite (`tests/test_adversarial.py`) |
 | API endpoints | **10** (health, campaigns, evidence, PDF, fingerprints, screen, operators) |
 | Infrastructure spin-up | **< 60 seconds** via `start.ps1` |
 | Evidence output formats | **JSON + PDF** per campaign |
